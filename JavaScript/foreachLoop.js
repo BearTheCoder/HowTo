@@ -16,11 +16,11 @@ peopleArray.forEach((person, index) => {
 });
 
 /*
-    Arguably, you could say the foreach loop is cleaner, but that is about the only benefit it offers.
-    While not the most important issue, for loops are faster than foreach loops.
+A couple notes:
+    1.) Arguably, you could say the foreach loop is cleaner.
+    2.) While not the most important issue, for loops are faster than foreach loops. 
+        (by about 1.5x according to https://levelup.gitconnected.com/which-is-faster-for-for-of-foreach-loops-in-javascript-18dbd9ffbca9)
         But we won't always have arrays of millions of items, so you'll hardly ever notice the difference.
-    But, what is important are statements like "break" or "continue", or keywords like "await".
+    3.) But, what is important are statements like "break" or "continue", or keywords like "await".
         You can't use these with a foreach loop.
-    Generally, you should program for ease of use and readability over performance first and foremost.
-        Then optimize if needed. So, if you don't need to use keywords like break, foreach is a great option.
 */
