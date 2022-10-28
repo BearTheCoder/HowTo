@@ -3,7 +3,7 @@
 // Standard Array
 const peopleArray = [ 'steve', 'clarence', 'Nevile', 'john', 'aaron', 'dave', 'tim', 'ed-ward' ];
 
-// Task: Log each array element and it's index to an array
+// Task: Log each array element and it's index to console.
 
 // For Loop
 for (let i = 0; i < peopleArray.length; i++) {
@@ -16,7 +16,7 @@ peopleArray.forEach((person, index) => {
 });
 
 /*
-    Arguable, you could say the foreach loop is cleaner, but that is about the only benefit it offers.
+    Arguably, you could say the foreach loop is cleaner, but that is about the only benefit it offers.
     While not the most important issue, for loops are faster than foreach loops.
         But we won't always have arrays of millions of items, so you'll hardly ever notice the difference.
     But, what is important are statements like "break" or "continue", or keywords like "await".
