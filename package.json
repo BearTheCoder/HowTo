@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/BearTheCoder/HowTo/issues"
   },
-  "homepage": "https://github.com/BearTheCoder/HowTo#readme"
+  "homepage": "https://github.com/BearTheCoder/HowTo#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "mysql2": "^2.3.3"
+  }
 }
