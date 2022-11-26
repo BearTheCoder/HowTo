@@ -17,26 +17,15 @@ const {
   Routes,
 } = require("discord.js"); //npm i discord.js
 
-const discordClient = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMembers,
-  ],
-});
+const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 
-discordClient.on('ready', () => {
-  console.log('Ready...');
-  getCommands();
-});
+discordClient.on('ready', () => { getCommands(); });
 
 function getCommands () {
   const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
   rest
     .get(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID))
     .then((data) => {
-      // data is an array of objects
       console.log(data);
     })
     .catch(console.error);

@@ -31,19 +31,10 @@ const {
   Routes,
 } = require("discord.js"); //npm i discord.js
 
-const discordClient = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMembers,
-  ],
-});
+const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 
 //guildCreate is the same as "bot added to guild"
-discordClient.on("guildCreate", (guild) => {
-  createNewCommand(guild);
-});
+discordClient.on("guildCreate", (guild) => { createNewCommand(guild); });
 
 function createNewCommand (guild) {
   const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
