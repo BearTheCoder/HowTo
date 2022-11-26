@@ -6,7 +6,7 @@
 const { initializeApp } = require("firebase/app"); // npm i firebase
 const { getStorage, ref, uploadBytes, getDownloadURL } = require("firebase/storage"); // npm i firebase
 const fs = require('fs');
-require('dotenv').config;
+require('dotenv').config; // npm i dotenv
 
 // You can receive the following after you create your project and register your app.
 const firebaseConfig = {
@@ -19,13 +19,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
 const storage = getStorage(app);
-
 const mountainsRef = ref(storage, './Images/mountains.jpg');
-
 const mountainsData = fs.readFileSync('./Images/mountains.jpg');
-console.log(mountainsRef);
 
 uploadBytes(mountainsRef, mountainsData)
   .then(() => {
