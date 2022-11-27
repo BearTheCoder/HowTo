@@ -15,6 +15,20 @@
 
     Both options are show below.
 
+    {
+    id: '1046501955301806142',
+    application_id: '1044262032452628590',
+    version: '1046501955301806144',
+    default_permission: true,
+    default_member_permissions: '4',
+    type: 1,
+    name: 'test2',
+    name_localizations: null,
+    description: '(MODS) does nothing',
+    description_localizations: null,
+    guild_id: '1045035613604294748'
+    }
+
 */
 
 require('dotenv').config(); // npm i dotenv
