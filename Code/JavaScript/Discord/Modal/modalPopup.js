@@ -12,7 +12,7 @@ Result:
   https://cdn.discordapp.com/attachments/1045035614266990675/1046540187385200690/image.png
 */
 
-require('dotenv').config(); // npm i dotenv (process.env)
+const env = require('config.json');
 const {
   Client, //Base Client
   GatewayIntentBits, //Base Client
@@ -35,8 +35,8 @@ discordClient.once("ready", () => {
 // Creates a "/modaltest" command we can use when bot loads.
 // For more information check out "../Slash Commands/createNewSlashCommand.js"
 function createNewCommand () {
-  const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
-  rest.get(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID))
+  const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
+  rest.get(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID))
     .then((commands) => {
       if (commands.find((command) => command.name === 'modaltest') === undefined) {
         const newCommand = new SlashCommandBuilder()
@@ -46,7 +46,7 @@ function createNewCommand () {
 
         commands.push(newCommand);
 
-        rest.put(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID), { body: commands, })
+        rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, })
           .then((data) => console.log(data))
           .catch(() => console.log("Command already exists..."));
       }
@@ -86,4 +86,4 @@ function showCustomModal () {
   return modal;
 };
 
-discordClient.login(process.env.BOT_TOKEN);
+discordClient.login(env.BOT_TOKEN);

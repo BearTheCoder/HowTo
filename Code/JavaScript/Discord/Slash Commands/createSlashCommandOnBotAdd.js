@@ -8,7 +8,7 @@
     Commands are removed from the server when a bot is kicked from the server.
 
     The code below:
-      rest.get(Routes.applicationGuildCommands(process.env.APPLICATION_ID, guild.id));
+      rest.get(Routes.applicationGuildCommands(env.APPLICATION_ID, guild.id));
     will get all existing commands and return them as an array of objects through a promise.
 
     You can then create a new command by using the SlashCommandBuilder or by creating a correctly formatted object.
@@ -22,7 +22,7 @@
 
 */
 
-require('dotenv').config(); // npm i dotenv
+const env = require('config.json'); // npm i dotenv
 const {
   Client,
   GatewayIntentBits,
@@ -37,9 +37,9 @@ const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 discordClient.on("guildCreate", (guild) => { createNewCommand(guild); });
 
 function createNewCommand (guild) {
-  const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
+  const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
   rest
-    .get(Routes.applicationGuildCommands(process.env.APPLICATION_ID, guild.id))
+    .get(Routes.applicationGuildCommands(env.APPLICATION_ID, guild.id))
     .then((commands) => {
 
       //Both commands below are valid syntax
@@ -60,9 +60,9 @@ function createNewCommand (guild) {
       commands.push(newCommand);
       commands.push(newCommand2);
 
-      return rest.put(Routes.applicationGuildCommands(process.env.APPLICATION_ID, guild.id), { body: commands, });
+      return rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, guild.id), { body: commands, });
     })
     .then((data) => console.log(data))
     .catch(console.error);
 }
-discordClient.login(process.env.BOT_TOKEN);
+discordClient.login(env.BOT_TOKEN);

@@ -8,7 +8,7 @@
     as long as the command names are unique, otherwise it will throw an error
 
     The code below:
-     rest.get(Routes.applicationGuildCommands(process.env.APPLICATION_ID, guildID))
+     rest.get(Routes.applicationGuildCommands(env.APPLICATION_ID, guildID))
     will return all existing slash commands to an array through a promise.
 
     Each Slash command can be built using the SlashCommandBuilder or by creating an appropriate object.
@@ -31,7 +31,7 @@
 
 */
 
-require('dotenv').config(); // npm i dotenv
+const env = require('config.json'); // npm i dotenv
 const {
   Client,
   GatewayIntentBits,
@@ -48,9 +48,9 @@ const discordClient = new Client({
 discordClient.on("ready", () => { createNewCommand(); });
 
 function createNewCommand () {
-  const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
+  const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
   rest
-    .get(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID))
+    .get(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID))
     .then((commands) => {
 
       //Both commands below are valid syntax
@@ -71,10 +71,10 @@ function createNewCommand () {
       commands.push(newCommand);
       commands.push(newCommand2);
 
-      return rest.put(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID), { body: commands, });
+      return rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, });
     })
     .then((data) => console.log(data))
     .catch(console.error);
 }
 
-discordClient.login(process.env.BOT_TOKEN);
+discordClient.login(env.BOT_TOKEN);

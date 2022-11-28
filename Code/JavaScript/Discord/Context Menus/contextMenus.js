@@ -66,10 +66,10 @@ Result:
 
 */
 
-require('dotenv').config(); // npm i dotenv (process.env)
+const env = require('config.json');
 const {
-  Client,
-  GatewayIntentBits,
+  Client, //Base Client
+  GatewayIntentBits, //Base Client
   REST, // Required to save context menu commands via Routes
   ApplicationCommandType, // Application command type 
   ContextMenuCommandBuilder, // Context Menu Builder
@@ -95,9 +95,9 @@ discordClient.on("interactionCreate", async interaction => {
 });
 
 function createNewContextMenuCommand () {
-  const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
+  const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
   rest
-    .get(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID))
+    .get(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID))
     .then((commands) => {
       if (commands.find((command) => command.name === 'Say Hi') === undefined) {
         // User context menu
@@ -115,10 +115,10 @@ function createNewContextMenuCommand () {
         commands.push(messageMenu);
       }
 
-      return rest.put(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID), { body: commands, });
+      return rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, });
     })
     .then((data) => console.log(data))
     .catch(console.error);
 }
 
-discordClient.login(process.env.BOT_TOKEN);
+discordClient.login(env.BOT_TOKEN);

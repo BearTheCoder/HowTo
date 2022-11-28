@@ -14,7 +14,7 @@ Result:
 
 */
 
-require('dotenv').config(); // npm i dotenv (process.env)
+const env = require('config.json'); // npm i dotenv (env)
 const {
   Client, //Base Client
   GatewayIntentBits, //Base Client
@@ -34,8 +34,8 @@ discordClient.once('ready', () => createNewCommand());
 // Creates a "/testselectmenu" command we can use when bot loads. 
 // For more information check out "../Slash Commands/createNewSlashCommand.js"
 function createNewCommand () {
-  const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
-  rest.get(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID))
+  const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
+  rest.get(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID))
     .then((commands) => {
       if (commands.find((command) => command.name === 'testselectmenu') === undefined) {
         const newCommand = new SlashCommandBuilder()
@@ -45,7 +45,7 @@ function createNewCommand () {
         commands.push(newCommand);
       }
 
-      return rest.put(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID), { body: commands, });
+      return rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, });
     })
     .then((data) => console.log(data))
     .catch(() => console.error);
@@ -119,4 +119,4 @@ function createSelectMenu () {
   };
 };
 
-discordClient.login(process.env.BOT_TOKEN);
+discordClient.login(env.BOT_TOKEN);

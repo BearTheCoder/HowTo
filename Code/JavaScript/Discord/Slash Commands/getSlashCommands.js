@@ -9,7 +9,7 @@
 
 */
 
-require('dotenv').config(); // npm i dotenv
+const env = require('config.json'); // npm i dotenv
 const {
   Client,
   GatewayIntentBits,
@@ -22,13 +22,13 @@ const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 discordClient.on('ready', () => { getCommands(); });
 
 function getCommands () {
-  const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
+  const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
   rest
-    .get(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID))
+    .get(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID))
     .then((data) => {
       console.log(data);
     })
     .catch(console.error);
 }
 
-discordClient.login(process.env.BOT_TOKEN);
+discordClient.login(env.BOT_TOKEN);

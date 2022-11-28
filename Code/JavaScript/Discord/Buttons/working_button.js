@@ -12,7 +12,7 @@ To understand this please ensure you understand how reactions and slash commands
 
 */
 
-require('dotenv').config(); // npm i dotenv (process.env)
+const env = require('config.json');
 const {
   Client,
   GatewayIntentBits,
@@ -35,8 +35,8 @@ discordClient.once("ready", () => {
 
 // Creates a "/buttontest" command we can use when bot loads.
 function createNewCommand () {
-  const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
-  rest.get(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID))
+  const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
+  rest.get(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID))
     .then((commands) => {
       if (commands.find((command) => command.name === 'buttontest') === undefined) {
         const newCommand = new SlashCommandBuilder()
@@ -46,7 +46,7 @@ function createNewCommand () {
 
         commands.push(newCommand);
 
-        rest.put(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID), { body: commands, })
+        rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, })
           .then((data) => console.log(data))
           .catch(() => console.log("Command already exists..."));
       }
@@ -79,4 +79,4 @@ function createButton () {
     );
 };
 
-discordClient.login(process.env.BOT_TOKEN);
+discordClient.login(env.BOT_TOKEN);
