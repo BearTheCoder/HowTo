@@ -1,10 +1,12 @@
 /*
+
+Dependancies: discord.js (npm install discord.js)
+
 Script created with bot having admin rights.
-Experiment with what rights your bot ACTAULLY needs.
+Experiment with what rights your bot ACTUALLY needs.
 
   https://discordjs.guide/interactions/context-menus.html
 
-This is another one of those "sugar syntax" type things.
 The context menu lets you add commands to the right click menu for either messages or users.
 
 These commands are similar to slash commands in the way that they are registered via routes.
@@ -12,6 +14,7 @@ Their usefulness comes about when you have a command that needs to target a spec
 Thus the "context" in context menu.
 
 Also similar to slash commands, everything is the same except for the "type".
+For more information check out "../Slash Commands/createNewSlashCommand.js"
 
 // Slash Command
 {
@@ -58,7 +61,8 @@ Also similar to slash commands, everything is the same except for the "type".
     guild_id: '1045035613604294748'
   },
 
-  This also means that you can create the command without the ContextMenuCommandBuilder() by creating the object yourself
+  This also means that you can create the command without the ContextMenuCommandBuilder() 
+  by creating the object yourself
 
 Result:
   https://cdn.discordapp.com/attachments/1045035614266990675/1046490727980474519/image.png
@@ -70,29 +74,16 @@ const env = require('config.json');
 const {
   Client, //Base Client
   GatewayIntentBits, //Base Client
-  REST, // Required to save context menu commands via Routes
-  ApplicationCommandType, // Application command type 
-  ContextMenuCommandBuilder, // Context Menu Builder
-  Routes,
-} = require("discord.js"); // npm i discord.js
+  REST, // Require for context menus
+  ContextMenuCommandBuilder, // Require for context menus
+  Routes, // Require for context menus
+  ApplicationCommandType, // Optional: You could remember the number types and use those instead
+} = require("discord.js");
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 
-// Ready is called when the bot is logged in
-discordClient.once("ready", () => {
-  createNewContextMenuCommand();
-});
-
-// The "interactionCreate" event is called when a slash command is used or an interaction object is used.
-discordClient.on("interactionCreate", async interaction => {
-  if (interaction.commandName === 'Say Hi') {
-    await interaction.reply(`${interaction.targetUser} HI!`); //Reply needed to end interaction without ephmeral error
-  }
-  else if (interaction.commandName === 'Message Information') {
-    await interaction.reply(`This does something...`); //Reply needed to end interaction without ephmeral error
-  }
-
-});
+// For more information on events, go to "../Events"
+discordClient.once("ready", () => { createNewContextMenuCommand(); });
 
 function createNewContextMenuCommand () {
   const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
@@ -107,11 +98,11 @@ function createNewContextMenuCommand () {
         commands.push(userMenu);
       }
 
-      else if (commands.find((command) => command.name === 'Message Information') === undefined) {
+      if (commands.find((command) => command.name === 'Message Information') === undefined) {
         // Message context menu
         const messageMenu = new ContextMenuCommandBuilder()
           .setName('Message Information')
-          .setType(ApplicationCommandType.Message);
+          .setType(3); // (ApplicationCommandType.Message) sugar syntax so you dont have to remember the number
         commands.push(messageMenu);
       }
 
@@ -120,5 +111,17 @@ function createNewContextMenuCommand () {
     .then((data) => console.log(data))
     .catch(console.error);
 }
+
+// The "interactionCreate" event is called when a slash command is used or an interaction object is used.
+discordClient.on("interactionCreate", async interaction => {
+  if (interaction.commandName === 'Say Hi') {
+    await interaction.reply(`${interaction.targetUser} HI!`); //Reply needed to end interaction without ephmeral error
+  }
+  else if (interaction.commandName === 'Message Information') {
+    await interaction.reply(`This does something...`); //Reply needed to end interaction without ephmeral error
+  }
+
+});
+
 
 discordClient.login(env.BOT_TOKEN);

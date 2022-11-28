@@ -44,12 +44,12 @@ Result:
 
 const env = require('config.json');
 const {
-  Client, //Base Client
-  GatewayIntentBits, //Base Client
-  REST, //Required for Slash Commands
-  SlashCommandBuilder, //Required for Slash Commands
-  Routes, //Required for Slash Commands
-  PermissionFlagsBits, //Sugar syntax: In case you don't remember the permission numbers.
+ Client, //Base Client
+ GatewayIntentBits, //Base Client
+ REST, //Required for Slash Commands
+ SlashCommandBuilder, //Required for Slash Commands
+ Routes, //Required for Slash Commands
+ PermissionFlagsBits, //Sugar syntax: In case you don't remember the permission numbers.
 } = require("discord.js");
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
@@ -58,34 +58,34 @@ const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 discordClient.on("ready", () => { createNewCommand(); });
 
 function createNewCommand () {
-  const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
-  rest
-    .get(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID)) //Get existing via Routes
-    .then((commands) => {
+ const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
+ rest
+  .get(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID)) //Get existing via Routes
+  .then((commands) => {
 
-      //Both commands below are valid syntax
-      const newCommand = new SlashCommandBuilder()
-        .setName('test') // Must be lower case and unique
-        .setDescription('test command') // Will be shown to users
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator); // Same as "0"
+   //Both commands below are valid syntax
+   const newCommand = new SlashCommandBuilder()
+    .setName('test') // Must be lower case and unique
+    .setDescription('test command') // Will be shown to users
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator); // Same as "0"
 
-      const newCommand2 = {
-        name: 'test2', // Must be lower case and unique
-        description: '(MODS) does nothing', // Will be shown to users
-        options: [], //For more information on options go to "./Options"
-        default_permission: undefined,
-        default_member_permissions: '4', // '0' for admins, '4' for mods, undefined for all users.
-        dm_permission: undefined
-      };
+   const newCommand2 = {
+    name: 'test2', // Must be lower case and unique
+    description: '(MODS) does nothing', // Will be shown to users
+    options: [], //For more information on options go to "./Options"
+    default_permission: undefined,
+    default_member_permissions: '4', // '0' for admins, '4' for mods, undefined for all users.
+    dm_permission: undefined
+   };
 
-      commands.push(newCommand); //Add to command array
-      commands.push(newCommand2); //Add to command array
+   commands.push(newCommand); //Add to command array
+   commands.push(newCommand2); //Add to command array
 
-      // Re-register commands via Routes
-      return rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, });
-    })
-    .then((data) => console.log(data))
-    .catch(console.error);
+   // Re-register commands via Routes
+   return rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, });
+  })
+  .then((data) => console.log(data))
+  .catch(console.error);
 }
 
 discordClient.login(env.BOT_TOKEN);

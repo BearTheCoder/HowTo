@@ -1,6 +1,6 @@
 /*
 Script created with bot having admin rights.
-Experiment with what rights your bot ACTAULLY needs.
+Experiment with what rights your bot ACTUALLY needs.
 
     https://discordjs.guide/interactions/buttons.html
 
@@ -27,7 +27,7 @@ const {
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 
-// "ready" is called when the bot logs into the server.
+// For more information on events, go to "../Events"
 discordClient.once("ready", () => {
   console.log("ready...");
   createNewCommand();

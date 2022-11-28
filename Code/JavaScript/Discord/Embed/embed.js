@@ -1,21 +1,24 @@
 /*
-Script created with bot having admin rights.
-Experiment with what rights your bot ACTAULLY needs.
 
-    https://discordjs.guide/popular-topics/embeds.html
+Dependancies: discord.js (npm install discord.js)
+
+Script created with bot having admin rights.
+Experiment with what rights your bot ACTUALLY needs.
+
+  https://discordjs.guide/popular-topics/embeds.html
 
 An embed is a fairly common "special message" that you can use to display all sorts of information
 formatted to an appealing style.
 
-This is the same as "sugar syntax" as it has no use besides displaying information, links, authors, etc in a more appealing
-manner.
+This is the same as "sugar syntax" as it has no use besides displaying information, links, authors, etc in a more 
+appealing manner.
 
 Result:
-    https://cdn.discordapp.com/attachments/1045035614266990675/1046454405228154941/image.png
+  https://cdn.discordapp.com/attachments/1045035614266990675/1046454405228154941/image.png
 
 */
 
-require('dotenv').config(); // npm i dotenv (process.env)
+const env = require('config.json');
 const {
   Client, //Base Client
   GatewayIntentBits, //Base Client
@@ -23,22 +26,20 @@ const {
   SlashCommandBuilder, //Needed for slash command
   Routes, //Needed for slash command
   EmbedBuilder, //Needed for embed
-} = require("discord.js"); // npm i discord.js
+} = require("discord.js");
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 
-// "ready" is called when the bot logs into the server.
-discordClient.once("ready", () => {
-  createNewCommand();
-});
+// For more information on events, go to "../Events"
+discordClient.once("ready", () => { createNewCommand(); });
 
 // Creates a "/testembed" command we can use when bot loads. 
 // For more information check out "../Slash Commands/createNewSlashCommand.js"
 function createNewCommand () {
-  const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
-  rest.get(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID))
+  const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
+  rest.get(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID))
     .then((commands) => {
-      if (commands.find((command) => command.name === 'testembed') !== undefined) {
+      if (commands.find((command) => command.name === 'testembed') === undefined) {
         const newCommand = new SlashCommandBuilder()
           .setName('testembed')
           .setDescription('embed test command')
@@ -46,7 +47,7 @@ function createNewCommand () {
         commands.push(newCommand);
       }
 
-      return rest.put(Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.testServerID), { body: commands, });
+      return rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, });
     })
     .then((data) => console.log(data))
     .catch(() => console.error);
@@ -86,4 +87,4 @@ function createEmbed () {
     .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 };
 
-discordClient.login(process.env.BOT_TOKEN);
+discordClient.login(env.BOT_TOKEN);

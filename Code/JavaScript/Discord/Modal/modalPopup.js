@@ -1,6 +1,9 @@
 /*
+
+Dependancies: discord.js (npm install discord.js)
+
 Script created with bot having admin rights.
-Experiment with what rights your bot ACTAULLY needs.
+Experiment with what rights your bot ACTUALLY needs.
 
   https://discordjs.guide/interactions/modals.html
 
@@ -10,6 +13,7 @@ attached to the discord client.
  
 Result:
   https://cdn.discordapp.com/attachments/1045035614266990675/1046540187385200690/image.png
+
 */
 
 const env = require('config.json');
@@ -23,14 +27,12 @@ const {
   ActionRowBuilder, //Required for modal
   TextInputBuilder, //Required for modal
   TextInputStyle, //Required for modal
-} = require("discord.js"); // npm i discord.js
+} = require("discord.js");
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 
-// "ready" is called when the bot logs into the server.
-discordClient.once("ready", () => {
-  createNewCommand();
-});
+// For more information on events, go to "../Events"
+discordClient.once("ready", () => { createNewCommand(); });
 
 // Creates a "/modaltest" command we can use when bot loads.
 // For more information check out "../Slash Commands/createNewSlashCommand.js"
@@ -43,14 +45,11 @@ function createNewCommand () {
           .setName('modaltest')
           .setDescription('modal test command')
           .setDefaultMemberPermissions(4);
-
         commands.push(newCommand);
-
-        rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, })
-          .then((data) => console.log(data))
-          .catch(() => console.log("Command already exists..."));
       }
+      return rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, });
     })
+    .then((data) => console.log(data))
     .catch(() => console.error);
 }
 
@@ -67,16 +66,15 @@ discordClient.on("interactionCreate", async (interaction) => {
   else if (interaction.customId === "modalObject") {
     interaction.reply(`You said ${interaction.fields.getTextInputValue("text")}`);
   }
-
 });
 
 // Modals use the TextInputBuilder and the TextInputStyle class.
 function showCustomModal () {
   const modal = new ModalBuilder()
-    .setCustomId("modalObject")
+    .setCustomId("modalObject") //Must be unique
     .setTitle("This is a modal!");
   const text = new TextInputBuilder()
-    .setCustomId("text")
+    .setCustomId("text") //Each field must have a custom ID
     .setLabel("You can put text here.")
     .setStyle(TextInputStyle.Paragraph);
   modal.addComponents(

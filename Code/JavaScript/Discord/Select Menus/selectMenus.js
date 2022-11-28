@@ -1,6 +1,9 @@
 /*
+
+Dependancies: discord.js (npm install discord.js)
+
 Script created with bot having admin rights.
-Experiment with what rights your bot ACTAULLY needs.
+Experiment with what rights your bot ACTUALLY needs.
 
   https://discordjs.guide/interactions/select-menus.html
 
@@ -14,7 +17,7 @@ Result:
 
 */
 
-const env = require('config.json'); // npm i dotenv (env)
+const env = require('config.json');
 const {
   Client, //Base Client
   GatewayIntentBits, //Base Client
@@ -24,11 +27,11 @@ const {
   ActionRowBuilder, //Required for select menu
   SelectMenuBuilder,//Required for select menu
 
-} = require("discord.js"); // npm i discord.js
+} = require("discord.js");
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 
-// "ready" is called when the bot logs into the server.
+// For more information on events, go to "../Events"
 discordClient.once('ready', () => createNewCommand());
 
 // Creates a "/testselectmenu" command we can use when bot loads. 
@@ -44,7 +47,6 @@ function createNewCommand () {
           .setDefaultMemberPermissions(4);
         commands.push(newCommand);
       }
-
       return rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, });
     })
     .then((data) => console.log(data))
@@ -64,7 +66,7 @@ discordClient.on("interactionCreate", async (interaction) => {
     });
   }
 
-  //Respose to selection box being used
+  //Respose to selection box being used, event fires whenever select box is closed
   if (interaction.customId === 'select') {
     await interaction.update({ content: 'Something was selected!', components: [] });
   }
@@ -76,7 +78,7 @@ discordClient.on("interactionCreate", async (interaction) => {
 // Creates two different kinds of select menus, multiple possible selections or single selection.
 function createSelectMenu () {
   const singleSelectMenu = new SelectMenuBuilder()
-    .setCustomId('select')
+    .setCustomId('select') //Must be unique
     .setPlaceholder('Can only select one')
     .addOptions(
       {
@@ -91,10 +93,10 @@ function createSelectMenu () {
       },
     );
   const multiSelectMenu = new SelectMenuBuilder()
-    .setCustomId('select 2')
+    .setCustomId('select 2') //Must be unique
     .setPlaceholder('Can select multiple options')
-    .setMinValues(1)
-    .setMaxValues(3)
+    .setMinValues(1) //has to select one
+    .setMaxValues(3) //can select up to three
     .addOptions([
       {
         label: 'Select me',
@@ -113,6 +115,7 @@ function createSelectMenu () {
       },
     ]);
 
+  //Not good practice, don't return multiple menus if using, demonstration only.
   return {
     first: new ActionRowBuilder().addComponents(singleSelectMenu),
     second: new ActionRowBuilder().addComponents(multiSelectMenu)
