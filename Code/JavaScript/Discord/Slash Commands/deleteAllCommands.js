@@ -1,5 +1,11 @@
 /*
 
+*****     DELETE ALL GUILD SLASH COMMANDS     *****
+
+Please look at all four modules, 
+  createNewSlashCommand.js, deleteAllCommands.js, getSlashCommands.js, and deleteCommandByID.js.
+to fully understand slash commands.
+
 Dependancies: discord.js (npm install discord.js)
 
 Script created with bot having admin rights.
@@ -31,8 +37,15 @@ discordClient.on("ready", () => { deleteAllCommands(); });
 
 function deleteAllCommands () {
   const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
+
+  //Log Existing Guild Commands
+  rest.get(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID))
+    .then((data) => console.log(`List of commands before... \n ${data}`))
+    .catch((err) => console.log(err));
+
+  //Erase all existing guild commands by setting body array to an empty array
   rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: [], })
-    .then((data) => console.log(data))
+    .then((data) => console.log(`List of commands after... \n ${data}`))
     .catch(console.error);
 }
 

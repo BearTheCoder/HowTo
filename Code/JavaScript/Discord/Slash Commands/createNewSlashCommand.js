@@ -1,5 +1,11 @@
 /*
 
+*****     CREATE NEW GUILD SLASH COMMANDS     *****
+
+Please look at all four modules, 
+  createNewSlashCommand.js, deleteAllCommands.js, getSlashCommands.js, and deleteCommandByID.js.
+to fully understand slash commands.
+
 Dependancies: discord.js (npm install discord.js)
 
 Script created with bot having admin rights.

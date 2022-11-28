@@ -1,5 +1,7 @@
 /*
 
+*****     SELECT MENUS     *****
+
 Dependancies: discord.js (npm install discord.js)
 
 Script created with bot having admin rights.
@@ -53,7 +55,7 @@ function createNewCommand () {
     .catch(() => console.error);
 }
 
-// The "interactionCreate" event is called when a slash command is used or an interaction object is used.
+// For more information on events, go to "../Events"
 discordClient.on("interactionCreate", async (interaction) => {
 
   // Response to slash command - send select menus

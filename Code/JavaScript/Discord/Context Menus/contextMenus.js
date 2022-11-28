@@ -1,5 +1,10 @@
 /*
 
+*****     CONTEXT MENUS     *****
+
+Context menus are very similar to slash commands, everything is the same except for the "type".
+For more information check out "../Slash Commands/createNewSlashCommand.js"
+
 Dependancies: discord.js (npm install discord.js)
 
 Script created with bot having admin rights.
@@ -12,9 +17,6 @@ The context menu lets you add commands to the right click menu for either messag
 These commands are similar to slash commands in the way that they are registered via routes.
 Their usefulness comes about when you have a command that needs to target a specific message or user.
 Thus the "context" in context menu.
-
-Also similar to slash commands, everything is the same except for the "type".
-For more information check out "../Slash Commands/createNewSlashCommand.js"
 
 // Slash Command
 {

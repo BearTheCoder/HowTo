@@ -1,5 +1,10 @@
 /*
 
+*****     STRING OPTION     *****
+
+To understand options, you should probably understand how slash commands work.
+Go To: "../createNewSlashCommand.js" to get started.
+
 Dependancies: discord.js (npm install discord.js)
 
 Script created with bot having admin rights.

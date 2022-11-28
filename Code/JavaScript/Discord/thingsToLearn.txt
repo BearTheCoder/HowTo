@@ -1,4 +1,3 @@
-global vs guild commands
 webhooks
 Routes
 buttons vs reactions

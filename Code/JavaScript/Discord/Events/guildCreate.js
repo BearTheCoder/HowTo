@@ -1,5 +1,7 @@
 /*
 
+*****     GUILD CREATE EVENT     *****
+
 Dependancies: discord.js (npm install discord.js)
 
 Script created with bot having admin rights.
