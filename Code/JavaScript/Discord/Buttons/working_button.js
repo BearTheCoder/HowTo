@@ -2,7 +2,13 @@
 
 *****     CREATE AND USE BUTTONS     *****
 
-PRE_REQ DESCRIPTION
+To understand why we use buttons, you should understand that buttons are intended to replace reactions
+where applicable.
+
+Go to "../Reactions" to learn more.
+
+Discord's opinion on Buttons vs Reactions (Last paragraph of article):
+  https://support-dev.discord.com/hc/en-us/articles/6381892888087-Bots-Buttons
 
 Dependancies: discord.js (npm install discord.js)
 
@@ -11,11 +17,7 @@ Experiment with what rights your bot ACTUALLY needs.
 
     https://discordjs.guide/interactions/buttons.html
 
-Buttons seem useless, but the name of the game is optimization and effectiveness.
-From my understanding, buttons are a great replacement for slash commands and reactions
-when it comes to super user friendly interactions.
-
-To understand this please ensure you understand how reactions and slash commands work.
+DESCRIPTION - SCRIPT WORKS BUT WHY IS IT BETTER THAN REACTIONS?
 
 */
 
@@ -28,9 +30,8 @@ const {
   SlashCommandBuilder,
   ButtonBuilder,
   ButtonStyle,
-
   Routes,
-} = require("discord.js"); // npm i discord.js
+} = require("discord.js");
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 
@@ -41,6 +42,7 @@ discordClient.once("ready", () => {
 });
 
 // Creates a "/buttontest" command we can use when bot loads.
+// For more information check out "../Slash Commands/createNewSlashCommand.js"
 function createNewCommand () {
   const rest = new REST({ version: "10" }).setToken(env.BOT_TOKEN);
   rest.get(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID))
@@ -50,18 +52,15 @@ function createNewCommand () {
           .setName('buttontest')
           .setDescription('button test command')
           .setDefaultMemberPermissions(4);
-
         commands.push(newCommand);
-
-        rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, })
-          .then((data) => console.log(data))
-          .catch(() => console.log("Command already exists..."));
       }
+      return rest.put(Routes.applicationGuildCommands(env.APPLICATION_ID, env.testServerID), { body: commands, });
     })
+    .then((data) => console.log(data))
     .catch(() => console.error);
 }
 
-// The "interactionCreate" event is called when a slash command is used or an interaction object is used.
+// For more information on events, go to "../Events"
 discordClient.on("interactionCreate", async (interaction) => {
 
   // Response to slash command to show button
@@ -74,7 +73,6 @@ discordClient.on("interactionCreate", async (interaction) => {
   }
 });
 
-// Modals use the TextInputBuilder and the TextInputStyle class.
 function createButton () {
   return new ActionRowBuilder()
     .addComponents(

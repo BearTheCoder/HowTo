@@ -12,8 +12,13 @@ Experiment with what rights your bot ACTUALLY needs.
 
 The following script will log a message as soon as the bot is logged into the server.
 
-If you are creating a bot as a service, maybe using the "guidCreate" event to register the
+If you are creating a bot as a service, using the "guidCreate" event to register the
 user's guild to your chosen persistence method would be best practice for user experience.
+
+A bot can be added to multiple guilds each time the "guildCreate" event may need to fire.
+For this reason we pair the event with the "on" method.
+
+The "guildCreate" event will return the guild's information that can be managed by a callback function.
 
 */
 
@@ -26,8 +31,14 @@ const {
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds,], });
 
-//Events.GuildCreate is the same as "bot added to guild": Events.GuildCreate could also be "guildCreate"
+//Events.GuildCreate is the same as "bot added to guild".
 discordClient.on(Events.GuildCreate, (guild) => {
+  console.log("Guild added bot...");
+  console.log(guild);
+});
+
+//Alternate syntax - Comment out before running code
+discordClient.on("guildCreate", (guild) => {
   console.log("Guild added bot...");
   console.log(guild);
 });

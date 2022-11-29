@@ -114,7 +114,7 @@ function createNewContextMenuCommand () {
     .catch(console.error);
 }
 
-// The "interactionCreate" event is called when a slash command is used or an interaction object is used.
+// For more information on events, go to "../Events"
 discordClient.on("interactionCreate", async interaction => {
   if (interaction.commandName === 'Say Hi') {
     await interaction.reply(`${interaction.targetUser} HI!`); //Reply needed to end interaction without ephmeral error
@@ -122,8 +122,6 @@ discordClient.on("interactionCreate", async interaction => {
   else if (interaction.commandName === 'Message Information') {
     await interaction.reply(`This does something...`); //Reply needed to end interaction without ephmeral error
   }
-
 });
-
 
 discordClient.login(env.BOT_TOKEN);
