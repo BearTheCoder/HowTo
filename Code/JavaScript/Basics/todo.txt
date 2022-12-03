@@ -1,0 +1,7 @@
+comma operator with for loops
+classes and objects
+delete operator
+spread syntax
+function* expressions
+in operator
+Map object
