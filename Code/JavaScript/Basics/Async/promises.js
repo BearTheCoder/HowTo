@@ -13,8 +13,10 @@
   ".catch()" is a function that handles the rejected promise.
 */
 
+const { CommandInteractionOptionResolver } = require("discord.js");
+
 // The resolved and rejected functions below only take in opne parameter each.
-function logToConsole(a, b) {
+function logToConsole (a, b) {
   return new Promise((resolved, rejected) => {
     if (a + b > 5) {
       const parameter = `${a + b} IS GREATER THAN 5`;
@@ -52,7 +54,7 @@ logToConsole(a, b)
 
 
 // Promise.resolve is only useful if you have a function that MIGHT return a promise.
-function maybeReturnPromise(a) {
+function maybeReturnPromise (a) {
   if (a < 5) {
     return a;
   }
@@ -66,5 +68,13 @@ maybeReturnPromise(6).then((data) => console.log(data)); //Outputs: 7
 
 Promise.resolve(maybeReturnPromise(4)).then((data) => console.log(data));
 
+// Promises only return either the rejected or resolved function
+function logToConsole () {
+  return new Promise((resolved, rejected) => {
+    rejected("rejected");
+    resolved("resolved");
+  });
+}
 
-//Promise.all?
+console.log((logToConsole()));
+console.log("Does it make it here?");
