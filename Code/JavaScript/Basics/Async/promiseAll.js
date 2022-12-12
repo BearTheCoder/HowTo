@@ -30,24 +30,24 @@ function returnSquaredPromise (a) {
  });
 }
 
-// With returned promise - outside "then" function
-const result3 = returnAddedPromise(1, 1)
- .then(result => returnMultiplyPromise(result, 2))
- .then(result => returnSquaredPromise(result));
-console.log(result3);
+let promiseArray = [];
 
-// With promises - inside "then" function
-returnAddedPromise(1, 1)
- .then(result => returnMultiplyPromise(result, 2))
- .then(result => returnSquaredPromise(result))
- .then(result => console.log(result));
 
-//With async/await
-awaitPromises();
-async function awaitPromises () {
- // With await
- const result1 = await returnAddedPromise(1, 1);
- const result2 = await returnMultiplyPromise(result1, 2);
- const result3 = await returnSquaredPromise(result2);
- console.log(result3);
+for (let i = 0; i < 10; i++) {
+ promiseArray.push(returnAddedPromise(i, i));
 }
+
+Promise.resolved;
+
+Promise.all(promiseArray)
+ .then(result => {
+  promiseArray = [];
+  result.forEach((element) => {
+   promiseArray.push(returnMultiplyPromise(element, element));
+  });
+ });
+
+
+
+
+
