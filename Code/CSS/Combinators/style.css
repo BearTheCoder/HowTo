@@ -1,0 +1,33 @@
+/* Combinators help you specify certain elements using a combination of class, ids, and tags as shown below */
+/* The first h1 will take the styling of the combinator because of specificty. */
+/* The target in a combinator is always the last in the combinator series */
+
+/* Descendant combinators are identified with a space (target h1)*/
+.container h1 {
+  background-color: lightblue;
+  color: red;
+}
+
+h1 {
+  background-color: blue;
+  color: white;
+}
+
+/* Adjacent Sibling Combinators are specified with a plus sign (target h2)*/
+/* As the name suggests, adjacent sibling combinators are looking for adjacent siblings under the same parent.*/
+h1+h2 {
+  background-color: black;
+  color: white;
+}
+
+/* General Sibling Combinators are specified with a tilde ~ (target h4) */
+/* A general sibling doesn't look for anything in a series, just a child under the same parent */
+h2~h4 {
+  background-color: red;
+  color: white;
+}
+
+/* Child combinators only apply to children and not all descendants (target p) */
+.childCombinator>p {
+  color: red
+}

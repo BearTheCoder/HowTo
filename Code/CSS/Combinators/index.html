@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="descendants">
+    <div class="container">
+      <h1>Explination in CSS file</h1>
+    </div>
+
+    <div class="container2">
+      <h1>Descendants</h1>
+    </div>
+  </div>
+
+  <hr>
+  <hr>
+
+  <div class="adjacentSibling">
+    <div>
+      <h1>First Sibling</h1>
+      <h2>Second Sibling</h2>
+      <h2>Third Sibling - not adjacent to h1</h2>
+    </div>
+  </div>
+
+  <hr>
+  <hr>
+
+  <div class="generalSibling">
+    <div>
+      <h2>First Sibling - h2</h2>
+      <h3>Second Sibling - h3</h3>
+      <h4>Third Sibling - h4</h4>
+    </div>
+    <hr>
+    <div>
+      <h3>Second Sibling - h3 under new parent</h3>
+      <h4>Third Sibling - h4 under new parent</h4>
+    </div>
+  </div>
+
+  <hr>
+  <hr>
+
+  <div class="childCombinator">
+    <h1>Child Combinators</h1>
+    <p>Only applies to children, not all descendants</p>
+    <div>
+      <p>for example, this paragraph is a grandchild.</p>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+/* The more specific identifer overrides the less specific */
+
+#h1 {
+  background-color: blue;
+}
+
+h1 {
+  background-color: red;
+  color: purple;
+}
+
+.h1 {
+  background-color: green;
+  color: white;
+}
+
+/* This document will have an h1 with a blue background and white text */
+
+/* The only thing more specific than an ID identifier is the inline style tag. */
