@@ -2,7 +2,7 @@ internal class IRCClient
     {
         /*      IMPORTANT LINKS TO UNDERSTAND      */
         // https://www.rfc-editor.org/rfc/rfc2812
-        // https://codereview.stackexchange.com/questions/142653/simple-irc-bot-in-c
+        // https://codereview.stackexchange.com/questions/142653/simple-irc-bot-in-c (original code)
         // https://dev.twitch.tv/docs/irc/authenticate-bot
         // https://dev.twitch.tv/docs/irc#rate-limits
 
