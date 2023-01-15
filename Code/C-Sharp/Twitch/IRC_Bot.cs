@@ -1,16 +1,15 @@
 internal class IRCClient
     {
         /*      IMPORTANT LINKS TO UNDERSTAND      */
-        // https://www.rfc-editor.org/rfc/rfc2812
         // https://codereview.stackexchange.com/questions/142653/simple-irc-bot-in-c (original code)
         // https://dev.twitch.tv/docs/irc/authenticate-bot
         // https://dev.twitch.tv/docs/irc#rate-limits
+        // https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#implicit-grant-flow
 
         internal string NICK { get; private set; }
         internal string CHANNEL { get; private set; }
         public string SERVER = "irc.chat.twitch.tv";
         private int PORT = 6667;
-        private string USER = "USER IRCbot 0 * :IRCbot"; //Check RFC2812 for IRC Standards
 
         private string PASS = "oauth:<access-token>";
 
