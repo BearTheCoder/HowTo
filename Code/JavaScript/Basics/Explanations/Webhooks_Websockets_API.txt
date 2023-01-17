@@ -1,0 +1,25 @@
+What is the difference between an API, Webhooks, and Websockets?
+I've been combing through Twitch's API over the past few days and had to learn the difference between the three.
+I have been tinkering with API's for years, but have never needed to understand the difference or even learn what something other than an API is, 
+as my approach to learning is "tackle it as it comes along" approach.
+So, here is what I learned.
+
+APIs, Webhooks, and Websockets are all designed to send information from the server but HOW they serve information is what makes them different.
+Firstly, APIs functionally serve data based on user request. That's it.
+You send an HTTP request to a server, and the server sends back the information that you requested.
+This is the most common way of getting information and generally if you ever go about accessing API a majority of them will be this way.
+
+But there are two super humans that wait behind the scene that are very similar in functionality.
+
+Webhooks and Websockets, are BOTH event/listener based request systems.
+Meaning, you can make a call to the API, SUBSCRIBE to a server event, and get packets of information sent to you every time an event triggers!
+A person you follow uploads a video? Event trigger, respond with code. Easy, cool, simple.
+If they both do ALL of that, what is the difference?
+Delivery method.
+
+Webhooks are designed to communicate between application servers, or server-to-server communication. (HTTP Based)
+Websockets communicate directly to client PCs through developer code using TCP.
+
+Another good peice of information that I totally didn't get from google is that Websockets are used for real time, back and forth communications, and webhooks are one-way.
+
+The more you know.
