@@ -1,6 +1,4 @@
-// Filename:  HttpServer.cs        
-// Author:    Benjamin N. Summerton <define-private-public>        
-// License:   Unlicense (http://unlicense.org/)
+// Code iterated from: https://gist.github.com/define-private-public/d05bc52dd0bed1c4699d49e2737e80e7
 
 // https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=<client id>&redirect_uri=<redirect uri>&scope=channel%3Amanage%3Apolls+channel%3Aread%3Apolls&state=c3ab8aa609ea11e793ae92361f002671
 
@@ -10,7 +8,7 @@ using System.Net;
 class HttpServer
 {
     public static HttpListener listener;
-    public static string url = "http://localhost:8200/";
+    public static string url = "<callback uri";
     public static int pageViews = 0;
     public static int requestCount = 0;
     public static string pageData =
@@ -38,7 +36,7 @@ class HttpServer
             HttpListenerRequest req = ctx.Request;
             HttpListenerResponse resp = ctx.Response;
 
-            Console.WriteLine(req.Url);
+            Console.WriteLine(req.Url); //Second response prints URL with queryString
 
             byte[] data = Encoding.UTF8.GetBytes(String.Format(pageData));
             resp.ContentType = "text/html";
