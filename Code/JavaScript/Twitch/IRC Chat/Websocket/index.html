@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+
+<body style="background-color: darkgray;">
+  <div style="display: flex;">
+    <div id="content" style="width: 60%; padding: 10px; background-color: white;">
+      <p>
+        1/29/2023 The following tutorial is assuming you have already registered a bot with Twitch...
+        <br><br>
+        OVERVIEW: <br>
+        What is IRC for? <br>
+        Basically, if you want a general overview of chat, send messages to chat, or see who joins chat then the IRC is for you.
+        Anything other than that, Twitch offers something better. <br><br>
+        Twitch's IRC Connection is done through either TCP connection or Websocket.
+        The following tutorial uses WebSocket...
+        <br><br>
+
+      <pre>
+  const socket = new WebSocket('wss://irc-ws.chat.twitch.tv:443');
+      </pre>
+
+      <br>
+      Firstly, instantiate a new websocket using the websocket object as seen above. <br>
+      Twitch requires PASS and NICK messages after connecting to the server, which is your authentication information. <br>
+      The NICK message is easy, it is just the username you use to login to Twitch. (not really) <br>
+      The PASS message is an oAuth token.
+      <br><br>
+      The NICK message is not really important from what I can see. I put in random nonsense and it still let me connect. I believe the username that displays in chat comes
+      from the oAuth token. Maybe, if using a client ID and secret to get the oAuth token MAYBE the user name is important, but in this sense it isn't.
+      <br><br>
+      If you don't know how to get an oAuth token, paste this link in your browser...
+      <br><br>
+
+
+      https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=&lt;your client id&gt;&redirect_uri=http://localhost:3000&scope=chat%3Aread+chat%3Aedit
+      <br><br>
+      ...then fill in the &lt;your client id&gt; and change the redirect to match the redirect you entered when registering your bot.
+      <br><br>
+
+      <pre>
+  PASS oauth:&lt;oAuth Token&gt;
+  NICK &lt;user&gt;
+      </pre>
+
+      <br>
+      Obviously, the PASS and NICK messages follow IRC standards and should be learned about, but for now we can send these messages through the open IRC connection using an
+      event listener attached to the socket.
+      <br><br>
+
+      <pre>
+  socket.addEventListener('open', (event) => {
+    socket.send(`PASS oauth:${oAuth}`);
+    socket.send(`NICK ${user}`);
+  });
+      </pre>
+
+      <br>
+      After passing it the PASS and NICK messages, you can read the output using the following event listener...
+      <br><br>
+
+      <pre>
+  socket.addEventListener('message', (event) => {
+    console.log(event.data)
+  });
+      </pre>
+
+      <br>
+      The output from the PASS and NICK messages look like this...
+      <br><br>
+
+      <pre>
+  :tmi.twitch.tv 001 &lt;user&gt; :Welcome, GLHF!
+  :tmi.twitch.tv 002 &lt;user&gt; :Your host is tmi.twitch.tv
+  :tmi.twitch.tv 003 &lt;user&gt; :This server is rather new
+  :tmi.twitch.tv 004 &lt;user&gt; :-
+  :tmi.twitch.tv 375 &lt;user&gt; :-
+  :tmi.twitch.tv 372 &lt;user&gt; :You are in a maze of twisty passages.
+  :tmi.twitch.tv 376 &lt;user&gt; :&gt;
+      </pre>
+
+      <br>
+      You can join a chat room by sending a JOIN message... <br>
+      There are no restrictions to what channel you can JOIN
+      <br><br>
+
+      <pre>
+  socket.addEventListener('open', (event) => {
+    socket.send(`PASS oauth:${oAuth}`);
+    socket.send(`NICK ${user}`);
+    socket.send(`JOIN #${channel}`);
+  });
+      </pre>
+
+      <br>
+      Now everything that happens in that user's chat will now display to the console. <br>
+      If you want to send a message to that user's chat, you can use the PRIVMSG message.
+      </p>
+      <br>
+      <pre>
+  socket.addEventListener('message', (event) => {
+    console.log(event.data);
+    if (event.data.includes("Hello World")) {
+      socket.send(`PRIVMSG #&{channel} :cringe`);
+    }
+  });
+      </pre>
+      <br>
+      Lastly, you have to maintain an open connection with the IRC server. This is managed in a pretty simple but common way.
+      <br>
+      Every so often the server will send a "PING" message, the server expects a "PONG" response. If the server doesn't recieve a PONG, it terminate the connection.
+
+      <pre>
+  socket.addEventListener('message', (event) => {
+    console.log(event.data);
+    if (event.data.includes("Hello World")) {
+      socket.send(`PRIVMSG #${channel} :cringe`);
+    }
+    if (event.data.includes("PING")) {
+      socket.send("PONG");
+    }
+  });
+      </pre>
+      <br>
+      Ok, so now we can join any channel, send, and recieve messages. What else is there to know? <br>
+      Well, rate limits are always a thing with any API... <br>
+      This is no different. Twitch allows 20 messages to be sent every 30 seconds, and allows 20 authentications and 20 JOIN messages every 10 seconds. <br><br>
+      That's it. <br><br>
+      AND on top of that Twitch's API is completely FREE!
+      <br><br>
+      What else... <br>
+      OH! If you plan on using this information for evil, you could listen for the PART message. <br>
+      The PART message is sent when your BOT is banned from chat. So, you could have the bot listen for the PART message and send it to another chat if it is banned.
+      <br><br>
+      <pre>
+  socket.addEventListener('message', (event) => {
+    console.log(event.data);
+    if (event.data.includes("Hello World")) socket.send(`PRIVMSG #${channel} :cringe`);
+    if (event.data.includes("PING")) socket.send("PONG");
+    if (event.data.includes("PART")) {
+      socket.send(`JOIN #${randomChannel}`);
+    }
+  });
+      </pre>
+      <br>
+      There are other Twitch-specific IRC messages that I am sure has some use, but not entirely worth going into detail. <br>
+      If you want to read up on those, go <a href="https://dev.twitch.tv/docs/irc/#supported-irc-messages">here</a>.
+    </div>
+    <div id="serverDisplay" style="padding: 10px; width: 40%;">
+      <h3>Twitch IRC Output</h3>
+      <hr><br>
+      <p>
+        To see it in action, go here...
+        <br><br>
+        <a href="https://www.twitch.tv/bearthecoder">https://www.twitch.tv/bearthecoder</a>
+      </p>
+      <br>
+      <p id="serverOutput" style="color: white; border: 1px solid black; width: 100%; padding: 10px; background-color: darkblue; height: 100%;"></p>
+    </div>
+  </div>
+</body>
+
+</html>
