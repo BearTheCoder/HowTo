@@ -107,7 +107,7 @@
 
 // npm install openai
 
-const secret = "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"; //Move to .env file - DO NOT HARD CODE THIS HERE
+const secret = ""; //Move to .env file - DO NOT HARD CODE THIS HERE
 const { Configuration, OpenAIApi } = require("openai");
 const config = new Configuration({ apiKey: secret });
 const openai = new OpenAIApi(config);
