@@ -21,6 +21,7 @@
     "firebase": "^9.14.0",
     "firebaseui": "^6.0.2",
     "mariadb": "^3.0.2",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "openai": "^3.1.0"
   }
 }
