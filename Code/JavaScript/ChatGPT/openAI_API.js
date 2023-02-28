@@ -107,17 +107,17 @@
 
 // npm install openai
 
-const secret = ""; //Move to .env file - DO NOT HARD CODE THIS HERE
+const secret = "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"; //Move to .env file - DO NOT HARD CODE THIS HERE
 const { Configuration, OpenAIApi } = require("openai");
 const config = new Configuration({ apiKey: secret });
 const openai = new OpenAIApi(config);
 
 function GPT3 (userPrompt) {
   const response = openai.createCompletion({
-    model: "text-curie-001",
+    model: "text-davinci-003",
     prompt: userPrompt,
     temperature: 0,
-    max_tokens: 100, // More tokens means more allowed in response.
+    max_tokens: 1000, // More tokens means more allowed in response.
   });
 
   response.then(res => {
