@@ -23,7 +23,7 @@ function coordinateDependantRandom () {
   for (let x = 0; x < 400; x++) {
     for (let y = 0; y < 400; y++) {
       //Generate Random Number between 0-255
-      const randNum = coordinateDependantLCG(x, y);
+      const randNum = getRandomAngle(x, y);
       push();
       noStroke();
       fill(randNum);
@@ -33,7 +33,7 @@ function coordinateDependantRandom () {
   }
 }
 
-function coordinateDependantLCG (x, y) {
+function getRandomAngle (x, y) {
   x += 100;
   y += 100;
   const h = 7140275233 + x * 374761393 + y * 668265263;
