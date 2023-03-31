@@ -1,3 +1,11 @@
+/*
+
+  The dot product is a numerical measurement of how alike the angle of two vectors are.
+  If you normalize the output, 1 is exactly alike, 0 is perpendicular, -1 is opposite.
+  All number exist inbetween. If you measure angles spaning a full 360 degrees, the output is a gradient.
+
+*/
+
 function setup () {
   createCanvas(400, 400);
   background(0);
