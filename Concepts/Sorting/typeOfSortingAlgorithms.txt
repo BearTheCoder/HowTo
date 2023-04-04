@@ -1,0 +1,17 @@
+https://www.youtube.com/watch?v=kPRA0W1kECg
+
+0:00 Selection Sort
+0:10 Insertion Sort
+0:39 Quick Sort
+1:06 Merge Sort
+1:28 Heap Sort
+1:56 Radix Sort (LSD)
+2:11 Radix Sort (MSD)
+2:33 std::sort (gcc)
+3:05 std::stable_sort
+3:37 Shell Sort
+4:01 Bubble Sort
+4:18 Cocktail Shaker Sort
+4:34 Gnome Sort
+4:53 Bitonic Sort
+5:17 Bogo Sort

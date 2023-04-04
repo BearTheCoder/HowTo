@@ -1,7 +1,7 @@
 import csv
 
-csvPath = "C:\\Users\\aadkins\\Desktop\\Code\\HowTo\\Concepts\\Sorting\\Data\\data.csv"
-newCSVPath = "C:\\Users\\aadkins\\Desktop\\Code\\HowTo\\Concepts\\Sorting\\Data\\dataExport.csv"
+csvPath = "D:\\Code\\HowTo\\Concepts\\Sorting\\Data\\data.csv"
+newCSVPath = "D:\\Code\\HowTo\\Concepts\\Sorting\\Data\\dataExport.csv"
 
 numbers = []
 
