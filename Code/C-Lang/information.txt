@@ -1,0 +1,8 @@
+To compile the C file into the exe, you have to use "make" in the terminal.
+Make can be downloaded and added to system variables using a few different methods.
+  Here is a StackOverflow link explaining where to download:
+    https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows
+
+With "make" installed and added to environment variables, you can run the following command
+  in the terminal to compile the c application into an exe
+  "make {fileNameNoExtension}"
