@@ -27,7 +27,7 @@ int main()
 
   // int is a whole number. A standard data type.
   // By default an int is 32 bits, signed. Meaning a range from -2.1 billion to 2.1 billion
-  int int1 = 1;
+  int int4 = 1;
 
   // You can choose for the int to be unsigned, making the range from 0 to 4.2 billion
   unsigned int uInt = 4000000000U;
@@ -36,11 +36,10 @@ int main()
   unsigned short int uShort = 59000;
 
   // You can also lenghten ints from 4 bytes to 8 bytes.
-  unsigned long int uShort = 200000000000000;
+  unsigned long int uLong = 200000000000000;
 
   // Lastly, you can extend the data type by choosing a long. which will range from -922 quadrillion to 922 quadrillion if signed.
   long int long1 = -4000000000000L;
-  long float uFloat = 1.455555f;
   long double lDouble = 6.6666666666666666L;
 
   _Bool falseBool = 0; // False
@@ -60,6 +59,32 @@ int main()
   char letter = 'a';
   char letter_a = 97;
   char nl = '\n';
+
+  // Format Specifiers
+  int two = 2;
+  printf("This number is %d", two);
+
+  float inches = 3.3f;
+  printf("My pp is %f inches", inches);
+
+  double pennies = 1.22222222222;
+  printf("The amount of pennies I have is %e million.", pennies);
+
+  double quarters = 1.3e12;
+  printf("I have %g million quarters", quarters);
+
+  char middleInitial = 'D';
+  printf("My middle initial is %c", middleInitial);
+
+  bool truthiness = false;
+  printf("All this is %i", truthiness);
+
+  printf("What is your name?");
+  char yourName[100];
+  scanf("%s", &yourName);
+
+  float x = 3.992121f;
+  printf("Floating`");
 
   return 0;
 }
