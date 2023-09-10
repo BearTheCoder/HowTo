@@ -16,7 +16,7 @@
 *   Command line arguments are used as parameters for the main() function.
 *   The first parameter is an int, which is a count of the arguments provided.
 *   The second parameter is an array of characters, or strings, that is a collection of the strings input in the command line.
-*   The firs element of the array is the
+*   The first element of the array by default is the name of the program, the rest of the elements in the array are strings entered in the
 *
 **********
 */
