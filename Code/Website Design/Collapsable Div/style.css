@@ -1,0 +1,36 @@
+body {
+  background-color: black;
+}
+
+#main {
+  background-color: white;
+  width: 620px;
+  height: 620px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+}
+
+#first {
+  background-color: red;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+#second {
+  background-color: blue;
+  border-radius: 20px;
+  margin: 0px 10px;
+  margin-bottom: 10px;
+}
+
+.collapsed {
+  width: 600px;
+  height: 50px;
+}
+
+.focused {
+  width: 600px;
+  height: 550px;
+}
