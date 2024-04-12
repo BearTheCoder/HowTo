@@ -1,0 +1,14 @@
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\bin\Debug\net7.0\GifDecompressor.exe
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\bin\Debug\net7.0\GifDecompressor.deps.json
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\bin\Debug\net7.0\GifDecompressor.runtimeconfig.json
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\bin\Debug\net7.0\GifDecompressor.dll
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\bin\Debug\net7.0\GifDecompressor.pdb
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\obj\Debug\net7.0\GifDecompressor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\obj\Debug\net7.0\GifDecompressor.AssemblyInfoInputs.cache
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\obj\Debug\net7.0\GifDecompressor.AssemblyInfo.cs
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\obj\Debug\net7.0\GifDecompressor.csproj.CoreCompileInputs.cache
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\obj\Debug\net7.0\GifDecompressor.dll
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\obj\Debug\net7.0\refint\GifDecompressor.dll
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\obj\Debug\net7.0\GifDecompressor.pdb
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\obj\Debug\net7.0\GifDecompressor.genruntimeconfig.cache
+C:\Users\aadkins\Desktop\Code\HowTo\Code\C-Sharp\GifDecompressor\obj\Debug\net7.0\ref\GifDecompressor.dll
