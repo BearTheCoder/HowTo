@@ -20,8 +20,8 @@ const pingMsg = { type: "PING" };
 const listenMsg = {
   type: "LISTEN",
   data: {
-    topics: ["chat_moderator_actions.177484095.177484095"],
-    auth_token: "olgzl7a56be7lxeg26kvdibjxvg2u7"
+    topics: ["chat_moderator_actions.<USER ID>.<MODERATOR ID>"],
+    auth_token: "<AUTH TOKEN>"
   }
 };
 
