@@ -1,33 +1,3 @@
-const socket = new WebSocket("wss://pubsub-edge.twitch.tv");
-
-const pingMsg = { type: "PING" };
-
-const listenMsg = {
-  type: "LISTEN",
-  nonce: getNonce(15),
-  data: {
-    topics: ["chat_moderator_actions.177484095.525734118"],
-    auth_token: "fay7uu6boqazn75pc26vv27jor6wq0"
-  }
-};
-
-socket.addEventListener("open", () => {
-  socket.send(JSON.stringify(pingMsg)); //Must be done every 5 minutes with variance
-  socket.send(JSON.stringify(listenMsg)); //Must be done within 15 seconds
-});
-
-socket.addEventListener("message", event => console.log(event));
-
-//Random 15 character token generator
-function getNonce (length) {
-  nonce = "";
-  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (var i = 0; i < length; i++) {
-    nonce += possible[Math.floor(Math.random() * possible.length)];
-  }
-  return nonce;
-}
-
 /*
   Key Points:
     Listen message must be sent within 15 seconds of connecting
@@ -42,3 +12,34 @@ function getNonce (length) {
     The three main topics are Bits, Subscriptions, and Channel Points.
     The data that is returned is also in stringified JSON format, so it is kind of hard to deal with.
 */
+
+const socket = new WebSocket("wss://pubsub-edge.twitch.tv");
+
+const pingMsg = { type: "PING" };
+
+const listenMsg = {
+  type: "LISTEN",
+  data: {
+    topics: ["chat_moderator_actions.177484095.177484095"],
+    auth_token: "olgzl7a56be7lxeg26kvdibjxvg2u7"
+  }
+};
+
+socket.addEventListener("open", () => {
+  socket.send(JSON.stringify(pingMsg)); //Must be done every 5 minutes with variance
+  socket.send(JSON.stringify(listenMsg)); //Must be done within 15 seconds
+});
+
+socket.addEventListener("message", event => {
+
+  console.log(event)
+
+  const layer1 = JSON.parse(event.data);
+
+  console.log(layer1)
+
+  if (layer1.type == "MESSAGE") {
+    const layer2 = JSON.parse(layer1.data.message).data;
+    console.log(layer2);
+  }
+});
